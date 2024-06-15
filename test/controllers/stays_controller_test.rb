@@ -3,6 +3,7 @@ require "test_helper"
 class StaysControllerTest < ActionDispatch::IntegrationTest
   setup do
     @stay = stays(:pet_friendly_stay)
+    @name = @stay.name + "#{rand(1000)}"
   end
 
   test "should get index" do
@@ -18,7 +19,7 @@ class StaysControllerTest < ActionDispatch::IntegrationTest
   test "should create stay" do
     puts @stay.valid?
     assert_difference("Stay.count") do
-      post stays_url, params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, description: @stay.description, image_url: @stay.image_url, max_persons: @stay.max_persons, name: @stay.name + "#{rand(1000)}", pet_friendly: @stay.pet_friendly, price: @stay.price } }
+      post stays_url, params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, description: @stay.description, image_url: @stay.image_url, max_persons: @stay.max_persons, name: @name, pet_friendly: @stay.pet_friendly, price: @stay.price } }
     end
 
     assert_redirected_to stay_url(Stay.last)
@@ -35,7 +36,7 @@ class StaysControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update stay" do
-    patch stay_url(@stay), params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, description: @stay.description, image_url: @stay.image_url, max_persons: @stay.max_persons, name: @stay.name, pet_friendly: @stay.pet_friendly, price: @stay.price } }
+    patch stay_url(@stay), params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, description: @stay.description, image_url: @stay.image_url, max_persons: @stay.max_persons, name: @name, pet_friendly: @stay.pet_friendly, price: @stay.price } }
     assert_redirected_to stay_url(@stay)
   end
 
