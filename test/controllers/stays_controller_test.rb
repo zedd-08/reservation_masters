@@ -2,7 +2,7 @@ require "test_helper"
 
 class StaysControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @stay = stays(:one)
+    @stay = stays(:pet_friendly_stay)
   end
 
   test "should get index" do
@@ -16,8 +16,9 @@ class StaysControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create stay" do
+    puts @stay.valid?
     assert_difference("Stay.count") do
-      post stays_url, params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, description: @stay.description, image_url: @stay.image_url, max_persons: @stay.max_persons, name: @stay.name, pet_friendly: @stay.pet_friendly, price: @stay.price } }
+      post stays_url, params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, description: @stay.description, image_url: @stay.image_url, max_persons: @stay.max_persons, name: @stay.name + "#{rand(1000)}", pet_friendly: @stay.pet_friendly, price: @stay.price } }
     end
 
     assert_redirected_to stay_url(Stay.last)

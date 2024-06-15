@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 pet_friendly_stay:
-  name: MyString1
+  name: Pet friendly stay
   address: MyString
   image_url: image.jpg
   max_persons: 1
@@ -12,7 +12,7 @@ pet_friendly_stay:
   price: 9.99
 
 non_pet_friendly_stay:
-  name: MyString2
+  name: Non pet friendly stay
   address: MyString
   image_url: image.jpg
   max_persons: 1
@@ -23,7 +23,7 @@ non_pet_friendly_stay:
   price: 9.99
 
 invalid_price:
-  name: MyString2
+  name: Stay with invalid price
   address: MyString
   image_url: image.jpg
   max_persons: 1

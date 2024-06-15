@@ -3,17 +3,17 @@
 #   name: content
 #   body: <p>In a <i>million</i> stars!</p>
 
-one:
+pet_friendly_stay:
   record: pet_friendly_stay (Stay)
-  name: content
+  name: description
   body: <p>In a <i>million</i> stars!</p>
 
-two:
+non_pet_friendly_stay:
   record: non_pet_friendly_stay (Stay)
-  name: content
+  name: description
   body: <b>In a <i>million</i> stars!</b>
 
-three:
+invalid_price:
   record: invalid_price (Stay)
-  name: content
+  name: description
   body: <b>In a <i>million</i> stars!</b>
