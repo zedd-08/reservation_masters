@@ -17,7 +17,7 @@ class StaysControllerTest < ActionDispatch::IntegrationTest
 
   test "should create stay" do
     assert_difference("Stay.count") do
-      post stays_url, params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, max_persons: @stay.max_persons, name: @stay.name, pet_friendly: @stay.pet_friendly, price: @stay.price } }
+      post stays_url, params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, description: @stay.description, image_url: @stay.image_url, max_persons: @stay.max_persons, name: @stay.name, pet_friendly: @stay.pet_friendly, price: @stay.price } }
     end
 
     assert_redirected_to stay_url(Stay.last)
@@ -34,7 +34,7 @@ class StaysControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update stay" do
-    patch stay_url(@stay), params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, max_persons: @stay.max_persons, name: @stay.name, pet_friendly: @stay.pet_friendly, price: @stay.price } }
+    patch stay_url(@stay), params: { stay: { address: @stay.address, area: @stay.area, bathrooms: @stay.bathrooms, bedrooms: @stay.bedrooms, description: @stay.description, image_url: @stay.image_url, max_persons: @stay.max_persons, name: @stay.name, pet_friendly: @stay.pet_friendly, price: @stay.price } }
     assert_redirected_to stay_url(@stay)
   end
 

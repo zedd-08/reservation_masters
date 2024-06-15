@@ -52,20 +52,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_080722) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "houses", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.integer "persons"
-    t.boolean "pet_friendly"
-    t.integer "bedrooms"
-    t.integer "bathrooms"
-    t.string "image_url"
-    t.decimal "area"
-    t.decimal "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "stays", force: :cascade do |t|
     t.string "name"
     t.string "address"

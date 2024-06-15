@@ -2,3 +2,18 @@
 #   record: name_of_fixture (ClassOfFixture)
 #   name: content
 #   body: <p>In a <i>million</i> stars!</p>
+
+one:
+  record: pet_friendly_stay (Stay)
+  name: content
+  body: <p>In a <i>million</i> stars!</p>
+
+two:
+  record: non_pet_friendly_stay (Stay)
+  name: content
+  body: <b>In a <i>million</i> stars!</b>
+
+three:
+  record: invalid_price (Stay)
+  name: content
+  body: <b>In a <i>million</i> stars!</b>

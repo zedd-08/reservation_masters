@@ -1,8 +1,20 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+pet_friendly_stay:
+  name: MyString1
   address: MyString
+  image_url: image.jpg
+  max_persons: 1
+  pet_friendly: true
+  bedrooms: 1
+  bathrooms: 1
+  area: 9.99
+  price: 9.99
+
+non_pet_friendly_stay:
+  name: MyString2
+  address: MyString
+  image_url: image.jpg
   max_persons: 1
   pet_friendly: false
   bedrooms: 1
@@ -10,12 +22,13 @@ one:
   area: 9.99
   price: 9.99
 
-two:
-  name: MyString
+invalid_price:
+  name: MyString2
   address: MyString
+  image_url: image.jpg
   max_persons: 1
   pet_friendly: false
   bedrooms: 1
   bathrooms: 1
   area: 9.99
-  price: 9.99
+  price: 0
