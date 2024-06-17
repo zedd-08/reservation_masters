@@ -23,7 +23,7 @@ non_pet_friendly_stay:
   price: 9.99
 
 invalid_price:
-  name: Stay with invalid price
+  name: Stay with low price
   address: MyString
   image_url: image.jpg
   max_persons: 1
@@ -31,4 +31,4 @@ invalid_price:
   bedrooms: 1
   bathrooms: 1
   area: 9.99
-  price: 0
+  price: 2
