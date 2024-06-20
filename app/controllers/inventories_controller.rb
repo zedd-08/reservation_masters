@@ -13,6 +13,7 @@ class InventoriesController < ApplicationController
   # GET /inventories/new
   def new
     @inventory = Inventory.new
+    @stays = Stay.all.collect { |stay| [stay.name, stay.id] }
   end
 
   # GET /inventories/1/edit

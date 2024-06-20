@@ -68,3 +68,4 @@ end
 
 gem "tailwindcss-rails", "~> 2.6"
 gem "simple_calendar"
+gem 'sass-rails'

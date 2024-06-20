@@ -1,4 +1,7 @@
 <div id="<%= dom_id inventory %>">
+  <%= month_calendar do |date|  %>
+    <%= date %>
+  <% end %>
   <p class="my-5">
     <strong class="block font-medium mb-1">Stay:</strong>
     <%= inventory.stay_id %>
