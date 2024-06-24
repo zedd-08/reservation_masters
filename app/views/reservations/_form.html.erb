@@ -11,9 +11,29 @@
     </div>
   <% end %>
 
+
+  <% if @stay %>
   <div class="my-5">
-    <%= form.label :stay_id %>
-    <%= form.text_field :stay_id, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= hidden_field_tag :stay_id, @stay.id %>
+  <%else %>
+    <%= form.label :stay_id %>  
+    <%= form.select :stay_id, options_for_select(@stays.collect { |stay| [stay.name, stay.id] }), { prompt: "Select a stay" }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  <% end %>
+  </div>
+  
+  <div class="my-5 block">
+    <%= form.label :name, "Enter your name" %>
+    <%= form.text_field :name, class: "shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 input-field" %>
+  </div>
+  
+  <div class="my-5 block">
+    <%= form.label :email, "Enter your email" %>
+    <%= form.email_field :email, class: "input-field" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :address, "Enter your address" %>
+    <%= form.text_area :address, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
@@ -26,9 +46,18 @@
     <%= form.date_field :check_out, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :status %>
-    <%= form.text_field :status, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  <div data-controller="payment">
+    <div class="my-5">
+      <%= form.label :pay_type %>
+      <%= form.select :pay_type, Reservation.pay_types.keys,
+ 	                      { prompt: 'Select a payment method' },
+	                      'data-payment-target' => 'selection',
+	                      'data-action' => 'payment#showAdditionalFields',
+ 	                      class: "input-field" %>
+    </div>
+    <%= render partial: 'ideal', locals: {form: form} %>
+    <%= render partial: 'card', locals: {form: form} %>
+    <%= render partial: 'ps', locals: {form: form} %>
   </div>
 
   <div class="inline">

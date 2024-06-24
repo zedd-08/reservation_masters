@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[ show edit update destroy ]
+  before_action :set_stay, only: %i[ new ]
 
   # GET /reservations or /reservations.json
   def index
@@ -13,6 +14,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = Reservation.new
+    @stays = Stay.all
   end
 
   # GET /reservations/1/edit
@@ -28,6 +30,7 @@ class ReservationsController < ApplicationController
         format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
         format.json { render :show, status: :created, location: @reservation }
       else
+        @stays = Stay.all
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
@@ -63,8 +66,14 @@ class ReservationsController < ApplicationController
       @reservation = Reservation.find(params[:id])
     end
 
+    def set_stay
+      if params[:stay]
+        @stay = Stay.find(params[:stay])
+      end
+    end
+
     # Only allow a list of trusted parameters through.
     def reservation_params
-      params.require(:reservation).permit(:stay_id, :check_in, :check_out, :status)
+      params.require(:reservation).permit(:stay_id, :name, :email, :address, :check_in, :check_out)
     end
 end
