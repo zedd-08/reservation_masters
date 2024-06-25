@@ -3,7 +3,7 @@ class StaysController < ApplicationController
 
   # GET /stays or /stays.json
   def index
-    @stays = Stay.all
+    @pagy, @stays = pagy(Stay.all)
   end
 
   # GET /stays/1 or /stays/1.json

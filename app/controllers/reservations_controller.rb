@@ -67,8 +67,12 @@ class ReservationsController < ApplicationController
     end
 
     def set_stay
-      if params[:stay]
-        @stay = Stay.find(params[:stay])
+      begin
+        if params[:stay]
+          @stay = Stay.find(params[:stay])
+        end
+        rescue ActiveRecord::RecordNotFound
+          redirect_to root_path, notice: "Invalid stay selected"
       end
     end
 
