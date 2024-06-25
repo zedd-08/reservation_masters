@@ -1,8 +1,10 @@
 <div id="<%= dom_id reservation %>">
+  <% if @stay %>
   <p class="my-5">
     <strong class="block font-medium mb-1">Stay:</strong>
     <%= @stay.name %>
   </p>
+  <% end %>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Name:</strong>
