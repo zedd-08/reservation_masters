@@ -107,6 +107,7 @@ GEM
     ffi (1.17.0-x86-linux-gnu)
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
+    flatpickr (4.6.13.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -235,6 +236,9 @@ GEM
       websocket (~> 1.0)
     simple_calendar (3.0.4)
       rails (>= 6.1)
+    simple_form (5.3.1)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -293,6 +297,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  flatpickr (~> 4.6)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
@@ -303,6 +308,7 @@ DEPENDENCIES
   sass-rails
   selenium-webdriver
   simple_calendar
+  simple_form (~> 5.3)
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 2.6)

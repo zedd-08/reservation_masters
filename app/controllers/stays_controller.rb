@@ -3,7 +3,20 @@ class StaysController < ApplicationController
 
   # GET /stays or /stays.json
   def index
-    @pagy, @stays = pagy(Stay.all)
+    if params[:check_in].to_date && params[:check_out].to_date
+      begin
+        start = params[:check_in].to_date
+        end_d = params[:check_out].to_date
+      rescue Date::Error
+        @stays = Stay.all
+      end
+      reserved_stays = Reservation.where(check_in: start..(end_d-1)).or(Reservation.where(check_out: (start+1)..end_d)).or((Reservation.where(check_out: end_d..).and(Reservation.where(check_in: ..start))))
+      reserved_stays = reserved_stays.map { |rs| rs.stay_id }
+      @stays = Stay.where.not(id: reserved_stays)
+    else
+      @stays = Stay.all
+    end
+    @pagy, @stays = pagy(@stays)
   end
 
   # GET /stays/1 or /stays/1.json

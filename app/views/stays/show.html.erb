@@ -6,7 +6,7 @@
 
     <%= render @stay %>
 
-    <%= link_to "Book this stay", new_reservation_path(stay_id: @stay.id), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Book this stay", new_reservation_path(stay_id: @stay.id, check_in: params[:check_in], check_out: params[:check_out]), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to "Edit this stay", edit_stay_path(@stay), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to "Back to all stays", stays_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
