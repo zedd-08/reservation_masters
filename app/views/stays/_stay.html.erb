@@ -6,42 +6,73 @@
   </p>
 
   <p class="my-5">
-    <i class="font-medium mb-1"><%= stay.address %></i>
+    <b class="font-medium mb-1"> Address: </b> <i class="font-medium mb-1"> <%= stay.address %></i>
   </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= stay.description %>
-  </p>
+  <div class="flex flex-auto my-5">
+    <div class="md:w-3/4">
+      <p class="my-5">
+        <%= stay.description %>
+      </p>
+    </div>
 
-  <p class="my-5">
-    <b class="font-medium mb-1">Max persons: </b>
-    <%= stay.max_persons %>
-  </p>
+    <div class="md:w-1/4 text-right place-items-center">
+      <table class="md:table-auto">
+        <tr>
+          <td>
+            <b class="font-medium mb-1">Max persons: </b>
+          </td>
+          <td>
+            <p> <%= stay.max_persons %> </p>
+          </td>
+        </tr>
 
-  <p class="my-5">
-    <b class="font-medium mb-1">Pet friendly: </b>
-    <%= stay.pet_friendly ? "Yes" : "No" %>
-  </p>
+        <tr>
+          <td>
+            <b class="font-medium mb-1">Pet friendly: </b>
+          </td>
+          <td>
+            <p class="my-2"> <%= stay.pet_friendly ? "Yes" : "No" %> </p>
+          </td>
+        </tr>
 
-  <p class="my-5">
-    <b class="font-medium mb-1">Bedrooms: </b>
-    <%= stay.bedrooms %>
-  </p>
+        <tr>
+          <td>
+              <b class="font-medium mb-1">Bedrooms: </b>
+          </td>
+          <td>
+            <p class="my-2"> <%= stay.bedrooms %> </p>
+          </td>
+        </tr>
 
-  <p class="my-5">
-    <b class="font-medium mb-1">Bathrooms: </b>
-    <%= stay.bathrooms %>
-  </p>
+        <tr>
+          <td>
+              <b class="font-medium mb-1">Bathrooms: </b>
+          </td>
+          <td>
+            <p class="my-2"> <%= stay.bathrooms %> </p>
+          </td>
+        </tr>
 
-  <p class="my-5">
-    <b class="font-medium mb-1">Area: </b>
-    <%= stay.area %>
-  </p>
+        <tr>
+          <td>
+              <b class="font-medium mb-1">Area: </b>
+          </td>
+          <td>
+            <p class="my-2"> <%= stay.area %> </p>
+          </td>
+        </tr>
 
-  <p class="my-5">
-    <strong class="font-medium mb-1">Price per night:</strong>
-    <%= number_to_currency(stay.price, :unit => "€", :separator => ",", :delimiter => ".") %>
-  </p>
+        <tr>
+          <td>
+              <strong class="font-medium mb-1">Price per night:</strong>
+          </td>
+          <td>
+            <p class="my-2"> <%= number_to_currency(stay.price, :unit => "€", :separator => ",", :delimiter => ".") %> </p>
+          </td>
+        </tr>
+      </table>
 
+    </div>
+  </div>
 </div>
