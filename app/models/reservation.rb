@@ -17,8 +17,8 @@ class Reservation < ApplicationRecord
 
   validates :name, :address, :email, :check_in, :check_out, presence: true
   validates :pay_type, inclusion: pay_types.keys
-  validates :check_out, comparison: { greater_than: :check_in,
-                                      message: "date must be after Check in date" }
+  validates :check_in, :check_out, availability: true
+  validate :check_out_after_check_in
 
   def total_amount
     total_amount = 0
@@ -27,4 +27,14 @@ class Reservation < ApplicationRecord
     end
     total_amount
   end
+
+  private
+
+  def check_out_after_check_in
+    return if check_out.blank? || check_in.blank?
+
+    if check_out < check_in
+      errors.add(:check_out, "must be after the start date")
+    end
+ end
 end
