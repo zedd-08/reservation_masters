@@ -26,6 +26,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     @reservation.stay_id = @stay.id
     @reservation.price = @stay.price
+    @reservation.status = @reservation.pay_type == "Pay at stay" ? 0 : 1
 
     respond_to do |format|
       if @reservation.save
@@ -41,11 +42,11 @@ class ReservationsController < ApplicationController
   # PATCH/PUT /reservations/1 or /reservations/1.json
   def update
     respond_to do |format|
-      if @reservation.update(reservation_params)
-        format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully updated." }
+      if @reservation.update(reserved_reservation_params)
+        format.html { redirect_to reservation_url(@reservation), stay: @stay, notice: "Reservation was successfully updated." }
         format.json { render :show, status: :ok, location: @reservation }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, stay: @stay, status: :unprocessable_entity }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
@@ -82,6 +83,10 @@ class ReservationsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def reservation_params
       params.require(:reservation).permit(:stay_id, :name, :email, :address, :check_in, :check_out, :pay_type)
+    end
+
+    def reserved_reservation_params
+      params.require(:reservation).permit(:status)
     end
 
     def set_stay_reserved
