@@ -52,15 +52,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_20_130652) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "inventories", force: :cascade do |t|
-    t.bigint "stay_id", null: false
-    t.datetime "date"
-    t.boolean "availability", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["stay_id"], name: "index_inventories_on_stay_id"
-  end
-
   create_table "reservations", force: :cascade do |t|
     t.bigint "stay_id", null: false
     t.date "check_in"
@@ -91,6 +82,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_20_130652) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "inventories", "stays"
   add_foreign_key "reservations", "stays"
 end
