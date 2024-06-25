@@ -12,13 +12,8 @@
   <% end %>
 
 
-  <% if @stay %>
   <div class="my-5">
     <%= hidden_field_tag :stay_id, @stay.id %>
-  <%else %>
-    <%= form.label :stay_id %>  
-    <%= form.select :stay_id, options_for_select(@stays.collect { |stay| [stay.name, stay.id] }), { prompt: "Select a stay" }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  <% end %>
   </div>
   
   <div class="my-5 block">

@@ -1,0 +1,24 @@
+<div id="<%= dom_id stay %>">
+  <p class="my-5">
+    <%= image_tag stay.image_url %>
+  </p>
+  <div>
+    <div>
+      <p class="my-5">
+        <b class="font-medium mb-1"> Address: </b> <i class="font-medium mb-1"> <%= stay.address %></i>
+      </p>        
+      <p class="my-5">
+        <i class="font-medium mb-1"> <%= truncate(strip_tags(stay.description), length: 80) %> </i>
+      </p>        
+    </div>
+    <div>
+      <p> <b class="font-medium mb-1">Max persons: </b> <%= stay.max_persons %> </p>
+      <p class="my-2"> <b class="font-medium mb-1">Pet friendly: </b> <%= stay.pet_friendly ? "Yes" : "No" %> </p>
+      <p class="my-2"> <b class="font-medium mb-1">Bedrooms: </b> <%= stay.bedrooms %> </p>
+      <p class="my-2"> <b class="font-medium mb-1">Bathrooms: </b> <%= stay.bathrooms %> </p>
+      <p class="my-2"> <b class="font-medium mb-1">Area: </b> <%= stay.area %> </p>
+      <p class="my-2"> <strong class="font-medium mb-1">Price per night:</strong> 
+        <%= number_to_currency(stay.price, :unit => "€", :separator => ",", :delimiter => ".") %> </p>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,22 @@
 <div id="<%= dom_id reservation %>">
   <p class="my-5">
     <strong class="block font-medium mb-1">Stay:</strong>
-    <%= reservation.stay_id %>
+    <%= @stay.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= reservation.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Address:</strong>
+    <%= reservation.address %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= reservation.email %>
   </p>
 
   <p class="my-5">
@@ -15,8 +30,8 @@
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Status:</strong>
-    <%= reservation.status %>
+    <strong class="block font-medium mb-1">Amount:</strong>
+    <%= reservation.total_amount %>
   </p>
 
 </div>

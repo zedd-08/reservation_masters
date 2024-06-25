@@ -1,11 +1,10 @@
 <div class="mx-auto md:w-2/3 w-full">
-  
-  <% if @stay %>
-  <h1 class="font-bold text-2xl">Reserving the stay: <%= link_to @stay.name, @stay, class: "hover:underline" %></h1>
-  <% else %>
-  <h1 class="font-bold text-2xl">New reservation</h1>
-  <% end %>
+
+  <h1 class="font-bold text-3xl">Reserving the stay: <%= link_to @stay.name, @stay, class: "hover:underline" %> </h1> 
+
   <%= render "form", reservation: @reservation %>
+
+  <%= render partial: 'stay', locals: { stay: @stay } %>
 
   <%= link_to "Back to reservations", reservations_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>

@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[ show edit update destroy ]
-  before_action :set_stay, only: %i[ new ]
+  before_action :set_stay, only: %i[ new create ]
+  before_action :set_stay_reserved, only: %i[ show edit ]
 
   # GET /reservations or /reservations.json
   def index
@@ -14,7 +15,6 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = Reservation.new
-    @stays = Stay.all
   end
 
   # GET /reservations/1/edit
@@ -24,14 +24,15 @@ class ReservationsController < ApplicationController
   # POST /reservations or /reservations.json
   def create
     @reservation = Reservation.new(reservation_params)
+    @reservation.stay_id = @stay.id
+    @reservation.price = @stay.price
 
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
         format.json { render :show, status: :created, location: @reservation }
       else
-        @stays = Stay.all
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, stay: @stay, status: :unprocessable_entity }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
@@ -68,8 +69,10 @@ class ReservationsController < ApplicationController
 
     def set_stay
       begin
-        if params[:stay]
-          @stay = Stay.find(params[:stay])
+        if params[:stay_id]
+          @stay = Stay.find(params[:stay_id])
+        else
+          redirect_to root_path, notice: "Please select a stay to create a reservation"
         end
         rescue ActiveRecord::RecordNotFound
           redirect_to root_path, notice: "Invalid stay selected"
@@ -78,6 +81,10 @@ class ReservationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reservation_params
-      params.require(:reservation).permit(:stay_id, :name, :email, :address, :check_in, :check_out)
+      params.require(:reservation).permit(:stay_id, :name, :email, :address, :check_in, :check_out, :pay_type)
+    end
+
+    def set_stay_reserved
+      @stay = Stay.find(@reservation.stay_id)
     end
 end
