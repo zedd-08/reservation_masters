@@ -11,21 +11,28 @@
   </head>
   <body>
     <header class="bg-orange-600">
-      <%= link_to image_tag("logo.png", alt: "Reservation Masters Logo", class: "w-32"), root_path %>
+      <%= link_to image_tag("logo.png", alt: "Reservation Masters Logo", class: "w-48"), root_path %>
       <h1><%= @page_title %></h1>
     </header>
     <section class="flex">
-      <nav class="bg-amber-600 p-6 w-32">
+      <nav class="bg-amber-600 p-6">
         <ul class="text-stone-100 leading-8">
-          <li><a href="/">Home</a></li>
-          <li><a href="/questions">Questions</a></li>
+          <% if user_signed_in? %>
+          <li>Welcome, <%= current_user.email %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %></li>
+          <% else %>
+          <li><%= link_to 'Admin sign in', new_user_session_path %></li>
+          <% end %>
+          <li><%= link_to 'Home', root_path %></li>
           <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
       </nav>
       <main class="container mx-auto mt-4 px-5 flex">
+        <p class="alert"><%= alert %></p>
         <%= yield %>
       </main>
     </section>
   </body>
+  <%=console%>
 </html>
