@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :reservations
-  resources :stays, only: %i[ index show edit create update ]
+  resources :stays, only: %i[ index new show edit create update ]
 
   put "stays/:id/enable", to: "stays#enable", as: "enable_stay"
   put "stays/:id/disable", to: "stays#disable", as: "disable_stay"
