@@ -94,13 +94,14 @@ class StaysController < ApplicationController
   # PATCH/PUT /stays/1 or /stays/1.json
   def enable
     @stay.enabled = true
-
-    if @stay.save!
-      format.html { redirect_to stay_url(@stay), notice: "Stay was successfully enabled." }
-      format.json { render :show, status: :ok, location: @stay }
-    else
-      format.html { render :show, status: :unprocessable_entity }
-      format.json { render json: @stay.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if @stay.save!
+        format.html { redirect_to stay_url(@stay), notice: "Stay was successfully enabled." }
+        format.json { render :show, status: :ok, location: @stay }
+      else
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: @stay.errors, status: :unprocessable_entity }
+      end
     end
   end
 
