@@ -10,9 +10,11 @@ class ReservationsController < ApplicationController
       if @reservations.empty?
         redirect_to root_path, notice: "Could not find any reservations with email: #{params[:email]}"
       end
+      @stays = Stay.where(id: @reservations.pluck(:stay_id)).pluck(:id, :name).to_h
     else
       if user_signed_in?
         @reservations = Reservation.all
+        @stays = Stay.where(id: @reservations.pluck(:stay_id)).pluck(:id, :name).to_h
       else
         redirect_to root_path, notice: "Email not provided, please try again"
       end
@@ -92,6 +94,18 @@ class ReservationsController < ApplicationController
         format.html { redirect_to reservation_url(@reservation), stay: @stay, notice: "An error occurred trying to cancel the reservation." }
         format.json { render :show, status: :internal_server_error, location: @reservation }
       end
+    end
+  end
+
+  def pay_type_params
+    if order_params[:pay_type] == "Credit Card"
+      params.require(:order).permit(:credit_card_number, :expiration_date)
+    elsif order_params[:pay_type] == "Check"
+      params.require(:order).permit(:routing_number, :account_number)
+    elsif order_params[:pay_type] == "Purchase Order"
+      params.require(:order).permit(:po_number)
+    else
+      {}
     end
   end
 

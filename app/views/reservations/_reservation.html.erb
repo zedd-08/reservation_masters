@@ -1,10 +1,12 @@
 <div id="<%= dom_id reservation %>">
-  <% if @stay %>
   <p class="my-5">
     <strong class="block font-medium mb-1">Stay:</strong>
+  <% if @stays %>
+    <%= @stays[reservation.stay_id] %>
+  <% elsif @stay %>
     <%= @stay.name %>
-  </p>
   <% end %>
+  </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Name:</strong>
