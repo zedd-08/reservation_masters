@@ -1,3 +1,5 @@
+require "paygo"
+
 class Reservation < ApplicationRecord
   enum pay_type: {
     "iDeal" => 0,
@@ -44,6 +46,41 @@ class Reservation < ApplicationRecord
 
   def checked_out?
     status == status["Checked out"]
+  end
+
+  def charge!(pay_type_params)
+    payment_details = {}
+    payment_method = nil
+
+    case pay_type
+    when "iDeal"
+      payment_method = :ideal
+      payment_details[:routing] = pay_type_params["routing_number"]
+      payment_details[:account] = pay_type_params["account_number"]
+    when "Bank Card"
+      payment_method = :bank_card
+      month, year = pay_type_params["expiration_date"].split(//)
+      payment_details[:cc_num] = pay_type_params["credit_card_number"]
+      payment_details[:expiration_month] = month
+      payment_details[:expiration_year] = year
+    when "Pay at stay"
+      payment_method = :cash
+      payment_details[:confirmation] = pay_type_params["confirmation"]
+    end
+
+    payment_result = Paygo.make_payment(
+      order_id: id,
+      payment_method: payment_method,
+      payment_details: payment_details,
+    )
+
+    if payment_result.succeeded?
+      # ReservationMailer.payment_status(self, true).deliver_later
+      puts "SUCCESS"
+    else
+      # ReservationMailer.payment_status(self, false).deliver_later
+      puts "FAILURE"
+    end
   end
 
   private
