@@ -37,15 +37,15 @@ class Reservation < ApplicationRecord
   end
 
   def cancelled?
-    status == status["Cancelled"]
+    self.status == status["Cancelled"]
   end
 
   def checked_in?
-    status == status["Checked in"]
+    self.status == status["Checked in"]
   end
 
   def checked_out?
-    status == status["Checked out"]
+    self.status == status["Checked out"]
   end
 
   def charge!(pay_type_params)
@@ -77,11 +77,11 @@ class Reservation < ApplicationRecord
     if payment_result.succeeded?
       # ReservationMailer.payment_status(self, true).deliver_later
       puts "SUCCESS"
-      status = status["Booked - Paid"] if pay_type != "Pay at stay"
+      self.status = status["Booked - Paid"] if pay_type != "Pay at stay"
     else
       # ReservationMailer.payment_status(self, false).deliver_later
       puts "FAILURE"
-      status = status["Booked - Payment pending"]
+      self.status = status["Booked - Payment pending"]
     end
   end
 
