@@ -77,3 +77,5 @@ gem "simple_form", "~> 5.3"
 gem "flatpickr", "~> 4.6"
 
 gem "devise", "~> 4.9"
+
+gem "sidekiq", "~> 7.2"
