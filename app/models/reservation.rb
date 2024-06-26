@@ -77,9 +77,11 @@ class Reservation < ApplicationRecord
     if payment_result.succeeded?
       # ReservationMailer.payment_status(self, true).deliver_later
       puts "SUCCESS"
+      status = status["Booked - Paid"] if pay_type != "Pay at stay"
     else
       # ReservationMailer.payment_status(self, false).deliver_later
       puts "FAILURE"
+      status = status["Booked - Payment pending"]
     end
   end
 
