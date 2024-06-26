@@ -21,7 +21,7 @@
       <tr>
         <td colspan="3">
           <div class="mt-8">
-            <%= link_to "New stay", new_stay_path, class: "inline rounded-lg py-3 px-5 bg-green-600 text-white block font-medium" %>
+            <%= link_to "Add a new stay", new_stay_path, class: "inline rounded-lg py-3 px-5 bg-green-600 text-white block font-medium" %>
           </div>
         </td>
       </tr>
@@ -43,21 +43,6 @@
             <b><%= number_to_currency(stay.price, :unit => "€", :separator => ",", :delimiter => ".") %></b> per night
           </p>
         </td>
-
-        <% if user_signed_in? %>
-        <td class="px-3">
-          <ul>
-            <li>
-              <%= link_to "Edit", edit_stay_path(stay), class: "hover:underline" %>
-            </li>
-
-            <li>
-                <%= link_to "Destroy", stay, class: "hover:underline", data: { turbo_method: :delete,
-                                                                                turbo_confirm: "Are you sure?" } %>
-            </li>
-          </ul>
-        </td>
-        <% end %>
       </tr>
       <% end %>
     </tbody>
