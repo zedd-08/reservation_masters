@@ -44,6 +44,8 @@ class ReservationsController < ApplicationController
     @reservation.price = @stay.price
     @reservation.status = @reservation.pay_type == "Pay at stay" ? 0 : 1
 
+    ChargeOrderJob.perform_async(@order.id, pay_type_params.to_h.stringify_keys)
+
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
@@ -98,12 +100,12 @@ class ReservationsController < ApplicationController
   end
 
   def pay_type_params
-    if order_params[:pay_type] == "Credit Card"
+    if order_params[:pay_type] == "Bank Card"
       params.require(:order).permit(:credit_card_number, :expiration_date)
-    elsif order_params[:pay_type] == "Check"
+    elsif order_params[:pay_type] == "iDeal"
       params.require(:order).permit(:routing_number, :account_number)
-    elsif order_params[:pay_type] == "Purchase Order"
-      params.require(:order).permit(:po_number)
+    elsif order_params[:pay_type] == "Pay at stay"
+      params.require(:order).permit(:confirmation)
     else
       {}
     end
