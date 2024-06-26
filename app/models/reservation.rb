@@ -10,14 +10,14 @@ class Reservation < ApplicationRecord
     "Booked - Paid" => 1,
     "Checked in" => 2,
     "Checked out" => 3,
-    "Cancel" => 4
+    "Cancelled" => 4
   }
 
   belongs_to :stay
 
   validates :name, :address, :email, :check_in, :check_out, presence: true
   validates :pay_type, inclusion: pay_types.keys
-  validates :check_in, :check_out, availability: true
+  validates :check_in, :check_out, availability: true, on: :create
   validate :check_out_after_check_in
 
   def total_amount
@@ -26,6 +26,24 @@ class Reservation < ApplicationRecord
       total_amount = (check_out - check_in).to_i * price
     end
     total_amount
+  end
+
+  def unavailable_dates
+    Reservation.pluck(:check_in, :check_out).map do |range|
+      { from: range[0], to: range[1] }
+    end
+  end
+
+  def cancelled?
+    status == status["Cancelled"]
+  end
+
+  def checked_in?
+    status == status["Checked in"]
+  end
+
+  def checked_out?
+    status == status["Checked out"]
   end
 
   private
