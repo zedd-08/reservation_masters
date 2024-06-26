@@ -5,7 +5,18 @@ class ReservationsController < ApplicationController
 
   # GET /reservations or /reservations.json
   def index
-    @reservations = Reservation.all
+    if params[:email] && !params[:email].strip.empty?
+      @reservations = Reservation.where(email: params[:email])
+      if @reservations.empty?
+        redirect_to root_path, notice: "Could not find any reservations with email: #{params[:email]}"
+      end
+    else
+      if user_signed_in?
+        @reservations = Reservation.all
+      else
+        redirect_to root_path, notice: "Email not provided, please try again"
+      end
+    end
   end
 
   # GET /reservations/1 or /reservations/1.json
