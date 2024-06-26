@@ -16,6 +16,7 @@
   <% end %>
 
   <table id="stays" class="mx-auto">
+    <% if user_signed_in? %>
     <tfoot>
       <tr>
         <td colspan="3">
@@ -25,6 +26,7 @@
         </td>
       </tr>
     </tfoot>
+    <% end %>
 
     <tbody>
       <% @stays.each do |stay| %>
@@ -42,6 +44,7 @@
           </p>
         </td>
 
+        <% if user_signed_in? %>
         <td class="px-3">
           <ul>
             <li>
@@ -54,6 +57,7 @@
             </li>
           </ul>
         </td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>

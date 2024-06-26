@@ -1,6 +1,8 @@
 <div id="<%= dom_id stay %>">
-  <h1 class="text-xl font-bold mb-3"> <%= stay.name %> </h1>
-
+  <h1 class="text-3xl font-bold mb-3"> <%= stay.name %> </h1>
+  <% if !stay.enabled %>
+    <h1 class="text-xl font-bold mb-3"> <%= user_signed_in? ? "This stay is disabled. This will prevent the stay from showing up in search results." : "This stay is curently not taking reservations." %> </h1>
+  <% end %>
   <p class="my-5">
     <%= image_tag stay.image_url %>
   </p>

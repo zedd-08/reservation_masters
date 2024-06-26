@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :reservations
-  resources :stays
+  resources :stays, only: %i[ index show edit create update ]
+
+  put "stays/:id/enable", to: "stays#enable", as: "enable_stay"
+  put "stays/:id/disable", to: "stays#disable", as: "disable_stay"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

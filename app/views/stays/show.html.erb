@@ -6,11 +6,16 @@
 
     <%= render @stay %>
 
-    <%= link_to "Book this stay", new_reservation_path(stay_id: @stay.id, check_in: params[:check_in], check_out: params[:check_out]), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Edit this stay", edit_stay_path(@stay), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to all stays", stays_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this stay", @stay, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    <div>
+      <%= link_to "Book this stay", new_reservation_path(stay_id: @stay.id, check_in: params[:check_in], check_out: params[:check_out]), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to "Back to all stays", stays_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     </div>
+
+    <% if user_signed_in? %>
+    <div class="inline-block ml-2">
+      <%= link_to "Edit this stay", edit_stay_path(@stay), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= button_to "#{@stay.enabled? ? "Disable" : "Enable" } this stay", @stay.enabled? ? disable_stay_path(@stay) : enable_stay_path(@stay) , method: :put, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    </div>
+    <% end %>
   </div>
 </div>
