@@ -4,3 +4,9 @@ import "controllers"
 
 import "trix"
 import "@rails/actiontext"
+
+//= require flatpickr
+
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr('.your-selector');
+  })

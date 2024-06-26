@@ -75,3 +75,5 @@ gem "pagy", "~> 8.4"
 gem "simple_form", "~> 5.3"
 
 gem "flatpickr", "~> 4.6"
+
+gem "devise", "~> 4.9"
