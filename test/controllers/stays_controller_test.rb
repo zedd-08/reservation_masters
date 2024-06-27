@@ -91,7 +91,7 @@ class StaysControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select "p", "Stay was successfully updated."
+    assert_equal "Stay was successfully updated.", flash[:notice]
     assert_select "h1", @name
   end
 
@@ -101,7 +101,7 @@ class StaysControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select "p", "Stay was successfully disabled."
+    assert_equal "Stay was successfully disabled.", flash[:notice]
     assert_select "h1", "This stay is disabled. This will prevent the stay from showing up in search results."
   end
 
@@ -112,6 +112,6 @@ class StaysControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select "p", "Stay was successfully enabled."
+    assert_equal "Stay was successfully enabled.", flash[:notice]
   end
 end
