@@ -43,4 +43,8 @@
     <%= reservation.status %>
   </p>
 
+  <div class="inline-block ml-2">
+    <%= link_to "Download receipt", generate_receipt_path(reservation), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  </div>
+
 </div>
