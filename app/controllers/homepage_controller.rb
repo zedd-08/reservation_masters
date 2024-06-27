@@ -1,6 +1,6 @@
 class HomepageController < ApplicationController
   def index
-    @count = Stay.count
+    @count = Stay.enabled.count
     session[:email] = nil
   end
 end
