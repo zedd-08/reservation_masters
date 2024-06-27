@@ -3,7 +3,7 @@
 pet_friendly_stay:
   name: Pet friendly stay
   address: MyString
-  image_url: image.jpg
+  image_url: 1-minecraft-img.png
   max_persons: 1
   pet_friendly: true
   bedrooms: 1
@@ -14,7 +14,7 @@ pet_friendly_stay:
 non_pet_friendly_stay:
   name: Non pet friendly stay
   address: MyString
-  image_url: image.jpg
+  image_url: 2-minecraft-img.png
   max_persons: 1
   pet_friendly: false
   bedrooms: 1
@@ -22,13 +22,25 @@ non_pet_friendly_stay:
   area: 9.99
   price: 9.99
 
-invalid_price:
+low_price:
   name: Stay with low price
   address: MyString
-  image_url: image.jpg
+  image_url: 3-minecraft-img.png
   max_persons: 1
   pet_friendly: false
   bedrooms: 1
   bathrooms: 1
   area: 9.99
   price: 2
+
+disabled_stay:
+  name: Stay initially disabled
+  address: MyString
+  image_url: 4-minecraft-img.png
+  max_persons: 1
+  pet_friendly: false
+  bedrooms: 1
+  bathrooms: 1
+  area: 9.99
+  price: 2
+  enabled: false

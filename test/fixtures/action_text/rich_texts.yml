@@ -17,3 +17,8 @@ invalid_price:
   record: invalid_price (Stay)
   name: description
   body: <b>In a <i>million</i> stars!</b>
+
+disabled_stay:
+  record: disabled_stay (Stay)
+  name: description
+  body: <b>In a <i>million</i> stars!</b>
