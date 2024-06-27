@@ -3,6 +3,8 @@ class ReservationsController < ApplicationController
   before_action :set_stay, only: %i[ new create ]
   before_action :set_stay_reserved, only: %i[ show edit ]
 
+  before_action :authenticate_user!, only: %i[ edit update ]
+
   # GET /reservations or /reservations.json
   def index
     if params[:email] && !params[:email].strip.empty?
@@ -50,6 +52,8 @@ class ReservationsController < ApplicationController
     @reservation.price = @stay.price
     @reservation.status = @reservation.pay_type == "Pay at stay" ? 0 : 1
 
+    session[:email] = reservation_params[:email]
+
     respond_to do |format|
       if @reservation.save
         ChargeOrderJob.perform_async(@reservation.id, pay_type_params.to_h.to_h)
@@ -87,8 +91,15 @@ class ReservationsController < ApplicationController
 
   # DELETE /reservations/1 or /reservations/1.json
   def destroy
+    if !user_signed_in?
+      if !session[:email] || session[:email] != @reservation.email
+        redirect_to root_path
+        return
+      end
+    end
+
     if @reservation.checked_in? || @reservation.checked_out?
-      redirect_to @reservation, notice: "Customer has already checked in. This reservation cannot be cancelled"
+      redirect_to @reservation, notice: "#{user_signed_in? ? "Customer has" : "You have"} already checked in. This reservation cannot be cancelled"
       return
     end
 
