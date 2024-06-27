@@ -22,10 +22,14 @@ class Reservation < ApplicationRecord
   validates :check_in, :check_out, availability: true, on: :create
   validate :check_out_after_check_in
 
+  def num_of_days
+    (check_out - check_in).to_i
+  end
+
   def total_amount
     total_amount = 0
     if check_in and check_out
-      total_amount = (check_out - check_in).to_i * price
+      total_amount = num_of_days * price
     end
     total_amount
   end
