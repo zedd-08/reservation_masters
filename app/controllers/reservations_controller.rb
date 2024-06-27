@@ -114,6 +114,8 @@ class ReservationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
       @reservation = Reservation.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path, notice: "Reservation not found"
     end
 
     def set_stay
