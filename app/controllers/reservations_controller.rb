@@ -10,6 +10,7 @@ class ReservationsController < ApplicationController
       if @reservations.empty?
         redirect_to root_path, notice: "Could not find any reservations with email: #{params[:email]}"
       end
+      session[:email] = params[:email]
       @stays = Stay.where(id: @reservations.pluck(:stay_id)).pluck(:id, :name).to_h
     else
       if user_signed_in?
@@ -23,6 +24,11 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/1 or /reservations/1.json
   def show
+    if !user_signed_in?
+      if !session[:email] || session[:email] != @reservation.email
+        redirect_to root_path
+      end
+    end
   end
 
   # GET /reservations/new
