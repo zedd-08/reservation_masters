@@ -56,7 +56,11 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        ChargeOrderJob.perform_async(@reservation.id, pay_type_params.to_h.to_h)
+        # begin
+        #   ChargeOrderJob.perform_async(@reservation.id, pay_type_params.to_h.to_h)
+        # rescue RedisClient::CannotConnectError
+        #   {}
+        # end
         format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
         format.json { render :show, status: :created, location: @reservation }
       else
