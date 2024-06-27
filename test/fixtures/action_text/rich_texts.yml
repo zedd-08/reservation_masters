@@ -13,8 +13,8 @@ non_pet_friendly_stay:
   name: description
   body: <b>In a <i>million</i> stars!</b>
 
-invalid_price:
-  record: invalid_price (Stay)
+low_price:
+  record: low_price (Stay)
   name: description
   body: <b>In a <i>million</i> stars!</b>
 

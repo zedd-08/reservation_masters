@@ -1,13 +1,67 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  stay: one
+  name: FirstName LastName
+  email: email1@mail.com
+  address: Some address, Netherlands
+  stay: pet_friendly_stay
   check_in: 2024-06-20
-  check_out: 2024-06-20
-  status: MyString
+  check_out: 2024-06-21
+  status: <%= Reservation.statuses["Booked - Payment pending"] %>
+  pay_type: <%= Reservation.pay_types["iDeal"] %>
+  price: 9.99
 
 two:
-  stay: two
-  check_in: 2024-06-20
-  check_out: 2024-06-20
-  status: MyString
+  name: FirstName LastName2
+  email: email123@mail.com
+  address: Some address, Netherlands
+  stay: pet_friendly_stay
+  check_in: 2024-06-23
+  check_out: 2024-06-24
+  status: <%= Reservation.statuses["Booked - Paid"] %>
+  pay_type: <%= Reservation.pay_types["Bank Card"] %>
+  price: 9.99
+
+three:
+  name: FirstName LastName2
+  email: email123@mail.com
+  address: Some address, Netherlands
+  stay: non_pet_friendly_stay
+  check_in: 2024-07-02
+  check_out: 2024-07-04
+  status: <%= Reservation.statuses["Checked in"] %>
+  pay_type: <%= Reservation.pay_types["Pay at stay"] %>
+  price: 9.99
+
+four:
+  name: FirstName LastName
+  email: email1@mail.com
+  address: Some address, Netherlands
+  stay: low_price
+  check_in: 2024-07-02
+  check_out: 2024-07-04
+  status: <%= Reservation.statuses["Checked out"] %>
+  pay_type: <%= Reservation.pay_types["Bank Card"] %>
+  price: 2
+
+five:
+  name: FirstName LastName
+  email: email1@mail.com
+  address: Some address, Netherlands
+  stay: non_pet_friendly_stay
+  check_in: 2024-06-02
+  check_out: 2024-06-04
+  status: <%= Reservation.statuses["Cancelled"] %>
+  pay_type: <%= Reservation.pay_types["iDeal"] %>
+  price: 9.99
+
+six:
+  name: FirstName LastName3
+  email: email3@mail.com
+  address: Some address, Netherlands
+  stay: non_pet_friendly_stay
+  check_in: 2024-06-02
+  check_out: 2024-06-04
+  status: <%= Reservation.statuses["Cancelled"] %>
+  pay_type: <%= Reservation.pay_types["Pay at stay"] %>
+  price: 9.99
