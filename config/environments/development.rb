@@ -45,6 +45,7 @@ Rails.application.configure do
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
+  config.assets.css_compressor = nil
 
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
