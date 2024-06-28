@@ -3,4 +3,7 @@ class HomepageController < ApplicationController
     @count = Stay.enabled.count
     session[:email] = nil
   end
+
+  def contact
+  end
 end

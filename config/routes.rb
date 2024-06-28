@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "reservations/:id/receipt", to: "generate_receipts#generate_pdf", as: "generate_receipt"
-
+  get "contact", to: "homepage#contact", as: "contact"
   # Defines the root path route ("/")
   root "homepage#index"
 end
