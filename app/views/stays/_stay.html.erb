@@ -1,31 +1,29 @@
 <div id="<%= dom_id stay %>">
-  <h1 class="text-3xl font-bold mb-3"> <%= stay.name %> </h1>
+  <h1 class="text-center"> <%= stay.name %> </h1>
   <% if !stay.enabled %>
-    <h1 class="text-xl font-bold mb-3"> <%= user_signed_in? ? "This stay is disabled. This will prevent the stay from showing up in search results." : "This stay is curently not taking reservations." %> </h1>
+    <h5 class="note note-danger mb-3 text-center"> <%= user_signed_in? ? "This stay is disabled. This will prevent the stay from showing up in search results." : "This stay is curently not taking reservations." %> </h5>
   <% end %>
-  <p class="my-5">
-    <%= image_tag stay.image_url %>
-  </p>
+    <%= image_tag stay.image_url, class: "img-fluid h-50" %>
 
   <p class="my-5">
     <b class="font-medium mb-1"> Address: </b> <i class="font-medium mb-1"> <%= stay.address %></i>
   </p>
 
-  <div class="flex flex-auto my-5">
-    <div class="md:w-3/4">
+  <div class="grid">
+
       <p class="my-5">
         <%= stay.description %>
       </p>
-    </div>
 
-    <div class="md:w-1/4 text-right place-items-center">
-      <table class="md:table-auto">
+
+    <div class="md:w-2/4 text-right place-items-center">
+      <table class="table">
         <tr>
           <td>
             <b class="font-medium mb-1">Max persons: </b>
           </td>
           <td>
-            <p> <%= stay.max_persons %> </p>
+            <%= stay.max_persons %>
           </td>
         </tr>
 
@@ -70,7 +68,7 @@
               <strong class="font-medium mb-1">Price per night:</strong>
           </td>
           <td>
-            <p class="my-2"> <%= number_to_currency(stay.price, :unit => "€", :separator => ",", :delimiter => ".") %> </p>
+            <p class="my-2"> <b> <%= number_to_currency(stay.price, :unit => "€", :separator => ",", :delimiter => ".") %> </p> </b>
           </td>
         </tr>
       </table>

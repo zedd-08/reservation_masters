@@ -1,24 +1,21 @@
-<div class="mx-auto md:w-3/4 w-full flex">
+<div class="w-100 d-flex">
   <div class="mx-auto">
     <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+      <p class="py-2 px-3 note note-success text-green-500 font-medium rounded-lg inline-block " id="notice"><%= notice %></p>
     <% end %>
-
     <%= render @stay %>
-
-    <div>
+    <br/>
+    <div class="d-flex justify-content-around gap-10" style="width: 100%">
       <% if @stay.enabled? %>
-      <%= link_to "Book this stay", new_reservation_path(stay_id: @stay.id, check_in: params[:check_in], check_out: params[:check_out]), 
-          class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= link_to "Book this stay", new_reservation_path(stay_id: @stay.id, check_in: params[:check_in], check_out: params[:check_out]), 
+          class: "btn btn-primary" %>
       <% end %>
-      <%= link_to "Back to all stays", stays_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <% if user_signed_in? %>
+        <%= link_to "Edit this stay", edit_stay_path(@stay), class: "btn btn-primary" %>
+        <%= button_to "#{@stay.enabled? ? "Disable" : "Enable" } this stay", @stay.enabled? ? disable_stay_path(@stay) : enable_stay_path(@stay) , method: :put, class: "btn btn-primary" %>
+      <% end %>
+      <%= link_to "Back to all stays", stays_path, class: "btn btn-secondary" %>
     </div>
-
-    <% if user_signed_in? %>
-    <div class="inline-block ml-2">
-      <%= link_to "Edit this stay", edit_stay_path(@stay), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      <%= button_to "#{@stay.enabled? ? "Disable" : "Enable" } this stay", @stay.enabled? ? disable_stay_path(@stay) : enable_stay_path(@stay) , method: :put, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
-    <% end %>
+    <br/>
   </div>
 </div>

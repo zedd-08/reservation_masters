@@ -1,56 +1,47 @@
-<div class="w-full">
+<div class="w-100">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <p class="py-2 px-3 note note-success text-green-500 font-medium rounded-lg inline-block " id="notice"><%= notice %></p>
   <% end %>
-
   <% content_for :title, "Available vacation homes" %>
-
-  <div class="flex justify-between items-center pb-8">
-    <h1 class="mx-auto font-bold text-4xl">Available vacation homes</h1>
-  </div>
-
-  <% if @pagy.count > @pagy.items %>
-    <div class="my-16">
+  <div class="d-flex flex-column justify-content-around align-items-center pb-8">
+    <h3 class="mx-auto font-bold text-4xl">There are <%= "#{@pagy.count} #{"stay".pluralize(@pagy.count)}" %> to choose from</h3>
+    <br/>
+    <% if @pagy.count > @pagy.items %>
+      <div class="my-16">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+    <br/>
+    <% if user_signed_in? %>
+      <div class="mt-8">
+        <%= link_to "Add a new stay", new_stay_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    <br/>
+    <% @stays.each do |stay| %>
+      <div class="d-flex flex-row">
+        <%= link_to image_tag(stay.image_url, class: "img-fluid p-2"), stay_path(stay, check_in: params[:check_in], check_out: params[:check_out]), class: "w-50" %>
+        <div class="card">
+          <div class="card-body p-2">
+            <h5 class="card-title"> <%= link_to stay.name, stay_path(stay, check_in: params[:check_in], check_out: params[:check_out]), class: "hover:underline" %></h5>
+            <p class="card-text"> <b>Address:</b> <%= stay.address %> </p>
+            <p class="card-text"> <%= truncate(strip_tags(stay.description), length: 140) %> </p>
+            <% if !stay.enabled? %>
+              <p class="card-text"> <b>Disabled</b></p>
+            <% end %>
+            <p class="card-text"> <%= truncate(strip_tags(stay.description), length: 140) %> </p>
+            <div class="d-flex flex-row justify-content-between pb-8">
+              <p class="card-text"> <b><%= number_to_currency(stay.price, :unit => "€", :separator => ",", :delimiter => ".") %></b> per night </p>
+              <%= link_to "Show this stay", stay_path(stay, check_in: params[:check_in], check_out: params[:check_out]), class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+    <% end %>
+    <br/>
+    <% if @pagy.count > @pagy.items %>
       <%== pagy_nav(@pagy) %>
     </div>
   <% end %>
-
-  <table id="stays" class="mx-auto">
-    <% if user_signed_in? %>
-    <tfoot>
-      <tr>
-        <td colspan="3">
-          <div class="mt-8">
-            <%= link_to "Add a new stay", new_stay_path, class: "inline rounded-lg py-3 px-5 bg-green-600 text-white block font-medium" %>
-          </div>
-        </td>
-      </tr>
-    </tfoot>
-    <% end %>
-
-    <tbody>
-      <% @stays.each do |stay| %>
-      <tr class="<%= cycle("bg-green-50", "bg-white") %>">
-        <td class="px-4 py-4">
-          <%= image_tag(stay.image_url, class: "w-42 m-2") %>
-        </td>
-
-        <td>
-          <h1 class="text-xl font-bold m-2"><%= link_to stay.name, stay_path(stay, check_in: params[:check_in], check_out: params[:check_out]), class: "hover:underline" %></h1>
-          <p class="m-2"> <i> <b>Address:</b> <%= stay.address %></i> </p>
-          <p class="m-2"> <%= truncate(strip_tags(stay.description), length: 80) %> </p>
-          <p class="m-2"> 
-            <b><%= number_to_currency(stay.price, :unit => "€", :separator => ",", :delimiter => ".") %></b> per night
-          </p>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-<% if @pagy.count > @pagy.items %>
-  <div class="my-16">
-    <%== pagy_nav(@pagy) %>
-  </div>
-<% end %>
 </div>

@@ -5,34 +5,40 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- Font Awesome -->
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+  />
+    <!-- Google Fonts -->
+  <link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+  />
+    <!-- MDB -->
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css"
+  rel="stylesheet"
+  />
   </head>
   <body>
-    <header class="bg-orange-600">
-      <%= link_to image_tag("logo.png", alt: "Reservation Masters Logo", class: "w-48"), root_path %>
-      <h1><%= @page_title %></h1>
-    </header>
-    <section class="flex">
-      <nav class="bg-amber-600 p-6">
-        <ul class="text-stone-100 leading-8">
-          <% if user_signed_in? %>
-          <li>Welcome, <%= current_user.email %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %></li>
-          <li><%= link_to 'See all reservations', reservations_path %></li>
-          <% else %>
-          <li><%= link_to 'Admin sign in', new_user_session_path %></li>
-          <% end %>
-          <li><%= link_to 'Home', root_path %></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </nav>
-      <main class="container mx-auto mt-4 px-5 flex">
+    <%= render partial: "layouts/header"%>
+    <section class="row">
+      <%= render partial: "layouts/navbar"%>
+      <main class="container col s10">
         <p class="alert"><%= alert %></p>
-        <%= yield %>
+        <div class="container w-90 "> 
+            <%= yield %>
+        </div>
       </main>
     </section>
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"
+    ></script>
   </body>
 </html>

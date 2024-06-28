@@ -1,6 +1,6 @@
 <div class="w-full">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <p class="py-2 px-3 note note-success text-green-500 font-medium rounded-lg inline-block " id="notice"><%= notice %></p>
   <% end %>
 
   <% content_for :title, "Reservations" %>
@@ -9,12 +9,30 @@
     <h1 class="font-bold text-4xl">Reservations</h1>
   </div>
 
-  <div id="reservations" class="min-w-full">
-    <% @reservations.each do |reservation| %>
-      <%= render reservation %>
-      <p>
-        <%= link_to "Show this reservation", reservation, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
-  </div>
+  <%# <div id="reservations" class="min-w-full">
+  <%#   <% @reservations.each do |reservation| %>
+ <%#      <%= render reservation %>
+  <%#     <p>
+  <%#       <%= link_to "Show this reservation", reservation, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%#     </p>
+  <%#   <% end %>
+ <%#  </div> %>
+
+  <table id="reservations" class="mx-auto">
+    <tbody>
+      <% @reservations.each do |reservation| %>
+      <tr class="<%= cycle("bg-green-50", "bg-white") %>">
+        <td>
+          <h2 class="text-xl font-bold m-2"><%= link_to @stays[reservation.stay_id], reservation, class: "hover:underline" %></h2>
+          <p class="m-2"> <b>Customer name:</b> <%= reservation.name %> </p>
+          <p class="m-2"> <b>Amount:</b> <%= number_to_currency(reservation.total_amount, :unit => "€", :separator => ",", :delimiter => ".") %> </p>
+        </td>
+        <td>
+          <%= link_to "Show this reservation", reservation, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 </div>

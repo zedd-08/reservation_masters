@@ -1,50 +1,77 @@
 <div id="<%= dom_id reservation %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Stay:</strong>
-  <% if @stays %>
-    <%= @stays[reservation.stay_id] %>
-  <% elsif @stay %>
-    <%= @stay.name %>
-  <% end %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= reservation.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Address:</strong>
-    <%= reservation.address %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Email:</strong>
-    <%= reservation.email %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Check in:</strong>
-    <%= reservation.check_in %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Check out:</strong>
-    <%= reservation.check_out %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Amount:</strong>
-    <%= reservation.total_amount %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Status:</strong>
-    <%= reservation.status %>
-  </p>
-
-  <div class="inline-block ml-2">
-    <%= link_to "Download receipt", generate_receipt_path(reservation), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  </div>
-
+  <table class="table">
+    <tr>
+      <th>
+        <strong class="block font-medium mb-1">Stay:</strong>
+      </th>
+      <td>
+        <% if @stays %>
+          <%= @stays[reservation.stay_id] %>
+        <% elsif @stay %>
+          <%= @stay.name %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="block font-medium mb-1">Customer Name:</strong>
+      </td>
+      <td>
+        <%= reservation.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="block font-medium mb-1">Customer Address:</strong>
+      </td>
+      <td>
+        <%= reservation.address %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="block font-medium mb-1">Customer Email:</strong>
+      </td>
+      <td>
+        <%= reservation.email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="block font-medium mb-1">Check in:</strong>
+      </td>
+      <td>
+        <%= reservation.check_in %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="block font-medium mb-1">Check out:</strong>
+      </td>
+      <td>
+        <%= reservation.check_out %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="block font-medium mb-1">Amount:</strong>
+      </td>
+      <td>
+        <%= reservation.total_amount %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="block font-medium mb-1">Status:</strong>
+      </td>
+      <td>
+        <%= reservation.status %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= link_to "Download receipt", generate_receipt_path(reservation), class: "btn btn-primary" %>
+      </td>
+    </tr>
+    </table>
 </div>

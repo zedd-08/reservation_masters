@@ -1,51 +1,48 @@
-<div class="w-full">
+<div class="w-100 d-flex flex-column align-items-center">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <p class="py-2 px-3 note note-success text-green-500 font-medium rounded-lg inline-block " id="notice"><%= notice %></p>
   <% end %>
 
   <% content_for :title, "We have #{pluralize(@count, 'stay')} waiting for you!" %>
 
-  <div class="flex justify-between items-center pb-8">
-    <h1 class="mx-auto font-bold text-4xl">We have <%= pluralize(@count, 'stay') %> waiting for you!</h1>
+  <div class="d-flex justify-between items-center pb-8">
+    <h2 class="mx-auto font-bold text-4xl">We have <%= pluralize(@count, 'stay') %> waiting for you!</h2>
   </div>
 
-  <div class="flex justify-between items-center pb-8">
-    <h2 class="mx-auto font-bold text-2xl"> Search for your next vacation home! </h2>
-  </div>
-  <div class="mx-auto md:w-2/3 w-full flex justify-around">
-    <%= link_to "Browse all stays", :stays, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <div class="mx-auto md:w-2/3 w-100 d-flex justify-content-around">
+    <%= link_to "Browse all stays", :stays, class: "btn btn-success" %>
   </div>
 
   <%= form_with url: :stays, method: :get do |form| %>
-  <div class="flex justify-around items-center pb-8">
+  <div class="d-flex justify-content-around align-items-center pb-8" style="gap: 25px">
     <div class="my-5">
-      <%= form.label :check_in %>
-      <%= form.date_field :check_in, class: "shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+      <%= form.label :check_in, class: "form-label"%>
+      <%= form.date_field :check_in, min: Date.today, class: "form-control" %>
     </div>
 
     <div class="my-5">
-      <%= form.label :check_out %>
-      <%= form.date_field :check_out, class: "shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+      <%= form.label :check_out, class: "form-label" %>
+      <%= form.date_field :check_out, min: Date.tomorrow, class:"form-control" %>
     </div>
-    <div class="flex justify-around my-5">
-      <%= form.submit "Search for available stays", class: "rounded-lg py-2 px-4 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <div class="d-flex justify-content-around my-5">
+      <%= form.submit "Search for available stays", class: "btn btn-primary" %>
     </div>
   </div>
   <% end %>
 
-  <div class="flex justify-between items-center pb-8">
+  <div class="d-flex justify-content-between align-items-center pb-8">
     <h2 class="mx-auto font-bold text-2xl"> Search for your reservations: </h2>
   </div>
 
   <%= form_with url: :reservations, method: :get do |form| %>
-  <div class="flex justify-around items-center pb-8">
+  <div class="d-flex justify-content-around align-items-center pb-8" style="gap: 50px">
     <div class="my-5">
-      <%= form.label :email %>
-      <%= form.email_field :email, class: "shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control" %>
     </div>
 
-    <div class="flex justify-around my-5">
-      <%= form.submit "Search for your reservations", class: "rounded-lg py-2 px-4 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <div class="d-flex justify-content-around my-5">
+      <%= form.submit "Search for your reservations", class: "btn btn-primary" %>
     </div>
   </div>
   <% end %>
