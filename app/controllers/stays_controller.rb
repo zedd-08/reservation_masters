@@ -26,7 +26,7 @@ class StaysController < ApplicationController
       end
     else
       if user_signed_in?
-        @stays = Stay.all
+        @stays = Stay.all.order(:enabled)
       else
         @stays = Stay.enabled
         flash[:notice] = "Dates not supplied. Showing all stays."
