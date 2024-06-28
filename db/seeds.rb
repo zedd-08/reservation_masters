@@ -14,9 +14,9 @@ user.update!(
 )
 
 1.upto(23) do |i|
-  stay = Stay.where(name: "Minecraft Villa ##{i}").first_or_initialize
+  stay = Stay.where(name: "Minecraft Villa - #{i}").first_or_initialize
   stay.update(
-    name: "Minecraft Villa ##{i}",
+    name: "Minecraft Villa - #{i}",
     address: "#{i*rand(1..10)} Creeper Lane, Blocktopia Heights, Minecraftia",
     description: %{<div><strong><em>A sleek, contemporary villa in a calming environment</em></strong></div><div>
   <br></div><div>Imagine a sleek, contemporary villa that stands out with its clean lines and minimalist design.
