@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+
   devise_for :users
   resources :reservations
   resources :stays, only: %i[ index new show edit create update ]

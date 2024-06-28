@@ -1,0 +1,167 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/reservations/{id}/receipt":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: generate_pdf generate_receipt
+      responses:
+        '200':
+          description: successful
+  "/":
+    get:
+      summary: list homepages
+      responses:
+        '200':
+          description: successful
+  "/reservations":
+    get:
+      summary: list reservations
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create reservation
+      responses:
+        '200':
+          description: successful
+  "/reservations/new":
+    get:
+      summary: new reservation
+      responses:
+        '200':
+          description: successful
+  "/reservations/{id}/edit":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: edit reservation
+      responses:
+        '200':
+          description: successful
+  "/reservations/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show reservation
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update reservation
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update reservation
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete reservation
+      responses:
+        '200':
+          description: successful
+  "/stays":
+    get:
+      summary: list stays
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create stay
+      responses:
+        '200':
+          description: successful
+  "/stays/new":
+    get:
+      summary: new stay
+      responses:
+        '200':
+          description: successful
+  "/stays/{id}/edit":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: edit stay
+      responses:
+        '200':
+          description: successful
+  "/stays/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show stay
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update stay
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update stay
+      responses:
+        '200':
+          description: successful
+  "/stays/{id}/enable":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    put:
+      summary: enable stay
+      responses:
+        '200':
+          description: successful
+  "/stays/{id}/disable":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    put:
+      summary: disable stay
+      responses:
+        '200':
+          description: successful
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

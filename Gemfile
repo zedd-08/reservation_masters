@@ -66,7 +66,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "tailwindcss-rails", "~> 2.6"
 gem "simple_calendar"
 gem 'sass-rails'
 
@@ -83,3 +82,6 @@ gem "sidekiq", "~> 7.2"
 gem "prawn", "~> 2.5"
 gem "prawn-table", "~> 0.2.2"
 gem "prawn-icon", "~> 3.1"
+
+gem "rspec-rails", "~> 6.1"
+gem "rswag", "~> 2.13"
