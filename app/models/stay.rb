@@ -1,6 +1,8 @@
 class Stay < ApplicationRecord
   has_rich_text :description
 
+  has_many :reservations
+
   validates :name, :address, :description, :max_persons, :bedrooms, :bathrooms, :area, :price, presence: true
 
   validates :pet_friendly, inclusion: { in: [true, false] }
