@@ -8,16 +8,16 @@ class ReservationsController < ApplicationController
   # GET /reservations or /reservations.json
   def index
     if params[:email] && !params[:email].strip.empty?
-      @reservations = Reservation.where(email: params[:email])
+      @reservations = Reservation.where(email: params[:email]).eager_load(:stay)
       if @reservations.empty?
         redirect_to root_path, notice: "Could not find any reservations with email: #{params[:email]}"
       end
       session[:email] = params[:email]
-      @stays = Stay.where(id: @reservations.pluck(:stay_id)).pluck(:id, :name).to_h
+      @stays = @reservations.map { |r| r.stay }.pluck(:id, :name).to_h
     else
       if user_signed_in?
-        @reservations = Reservation.all
-        @stays = Stay.where(id: @reservations.pluck(:stay_id)).pluck(:id, :name).to_h
+        @reservations = Reservation.all.eager_load(:stay)
+        @stays = @reservations.map { |r| r.stay }.pluck(:id, :name).to_h
       else
         redirect_to root_path, notice: "Email not provided, please try again"
       end
@@ -151,8 +151,8 @@ class ReservationsController < ApplicationController
           redirect_to root_path, notice: "Please select a stay to create a reservation"
           return
         end
-        rescue ActiveRecord::RecordNotFound
-          redirect_to root_path, notice: "Invalid stay selected"
+      rescue ActiveRecord::RecordNotFound
+        redirect_to root_path, notice: "Invalid stay selected"
       end
     end
 
